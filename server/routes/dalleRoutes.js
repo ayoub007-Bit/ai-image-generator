@@ -50,7 +50,7 @@ router.post('/', async (req, res) => {
         console.error(error);
         res.status(500).send(error && error.message ? error.message : 'Something went wrong')
     }
-})
+});
 
 
 
