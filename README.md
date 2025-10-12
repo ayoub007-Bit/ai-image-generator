@@ -4,7 +4,7 @@
 This project allows users to create images from text prompts using the OpenAI's model gpt-image-1. 
 
 ## Live Demo
-genart-ai.vercel.app
+[genart-ai.vercel.app]
 
 ## Features
 - Generate images from text prompts
