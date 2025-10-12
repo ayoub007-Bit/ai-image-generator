@@ -28,7 +28,8 @@ router.post('/', async (req, res) => {
         const aiResponse = await openai.images.generate({
             model: 'gpt-image-1',   //new image generation model
             prompt: prompt,
-            size:'1024x1024',
+            size:'512x512',
+            quality: "standard",
         }) /* response = {
                             "object": "list",
                             "data": [
