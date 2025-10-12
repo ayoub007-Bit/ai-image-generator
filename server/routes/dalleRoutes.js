@@ -29,7 +29,7 @@ router.post('/', async (req, res) => {
             model: 'gpt-image-1',   //new image generation model
             prompt: prompt,
             size:'512x512',
-            quality: "standard",
+            quality: "low",
         }) /* response = {
                             "object": "list",
                             "data": [
