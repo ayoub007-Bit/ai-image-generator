@@ -14,7 +14,7 @@ const ai = new GoogleGenAI({
     vertexai: true,
     project: process.env.GOOGLE_PROJECT_ID, 
     location: 'us-central1',
-    apiKey: process.env.GEMINI_API_KEY // Store your key in an environment variable
+     
 });
 
 //simple get route to test
