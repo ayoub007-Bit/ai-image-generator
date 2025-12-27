@@ -11,6 +11,9 @@ const router = express.Router(); // .Router() lets us create modular, mountable 
 //intialize gemini api
 
 const ai = new GoogleGenAI({
+    vertexai: true,
+    project: process.env.GOOGLE_PROJECT_ID, 
+    location: 'us-central1',
     apiKey: process.env.GEMINI_API_KEY // Store your key in an environment variable
 });
 
@@ -28,7 +31,7 @@ router.post('/', async (req, res) => {
 
         //call the new openai images api
         const aiResponse = await ai.models.generateImages({
-            model: 'gemini-2.0-flash-exp', // Google's best current model
+            model: 'imagen-3.0-fast-generate-001', // Google's best current model
             prompt: `digital art style, creative, highly detailed, expressive, not photorealistic. Render the following: ${prompt}`,
             config: {
                 numberOfImages: 1,
