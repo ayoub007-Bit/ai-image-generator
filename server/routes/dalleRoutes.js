@@ -1,20 +1,22 @@
 import express from 'express';
 import *as dotenv from 'dotenv';
-import OpenAI from "openai"; //
+import { GoogleGenAI } from '@google/genai';
 
 
 
-dotenv.config(); 
+dotenv.config();
 
 const router = express.Router(); // .Router() lets us create modular, mountable route handlers. A router instance is a complete middleware and routing
 
-//intialize OpenAI client 
+//intialize gemini api
 
-const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY })
+const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY // Store your key in an environment variable
+});
 
 //simple get route to test
 router.get('/', (req, res) => {
-    res.status(200).json({ message: 'Hello from DALL-E'})
+    res.status(200).json({ message: 'Hello from DALL-E' })
 })
 
 
@@ -25,14 +27,17 @@ router.post('/', async (req, res) => {
         const { prompt } = req.body;
 
         //call the new openai images api
-        const aiResponse = await openai.images.generate({
-            model: 'gpt-image-1',   //new image generation model
-            prompt: prompt,
-            size:'1024x1024',
-            quality: "low",
+        const aiResponse = await ai.models.generateImages({
+            model: 'gemini-2.0-flash-exp', // Google's best current model
+            prompt: `digital art style, creative, highly detailed, expressive, not photorealistic. Render the following: ${prompt}`,
+            config: {
+                numberOfImages: 1,
+                aspectRatio: '1:1',  // Replaces "size: 1024x1024"
+                includeRaiReason: true // Optional: Helps debug if safety filters block the image
+            }
         }) /* response = {
                             "object": "list",
-                            "data": [
+                            "daa": [
                                 {
                                 "id": "image-xxxxxxx",
                                 "object": "image",
@@ -42,7 +47,7 @@ router.post('/', async (req, res) => {
                           } */
 
 
-        const image = aiResponse.data[0].b64_json; // this line extracts the first generated image from the API response as a Base64
+        const image = aiResponse.generatedImages[0].image.imageBytes; // this line extracts the first generated image from the API response as a Base64
         console.log(aiResponse);
         res.status(200).json({ photo: image }) // it sends a successful HTTP response as a JSON object
 

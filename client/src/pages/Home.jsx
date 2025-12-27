@@ -24,7 +24,7 @@ const Home = () => {
             try {
                 const response = await fetch("https://genart-6pmm.onrender.com/api/v1/post",
                     {
-                        method:'GET',
+                          method:'GET',
                         headers: {
                             'Content-type': 'application/json'
                         },
