@@ -21,7 +21,7 @@ const App = () => {
        </main>
     <footer className="bg-gray-900 text-gray-300 py-6">
       <div className="max-w-7xl mx-auto px-4 text-center">
-        <h2 className="text-lg font-semibold text-white">Dall-E</h2>
+        <h2 className="text-lg font-semibold text-white"></h2>
         <p className="mt-2 text-sm">
           &copy; {new Date().getFullYear()} Ayoub. All rights reserved.
         </p>
